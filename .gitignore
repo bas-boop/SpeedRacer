@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Not needed folders and files
+/.idea
+/.vs
+/SpeedRacer
+/x64
+SpeedRacer.sln
+SpeedRacer.vcxproj
+SpeedRacer.vcxproj.filters
+SpeedRacer.vcxproj.user
