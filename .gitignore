@@ -40,3 +40,6 @@ SpeedRacer.sln
 SpeedRacer.vcxproj
 SpeedRacer.vcxproj.filters
 SpeedRacer.vcxproj.user
+
+/lib
+/include
