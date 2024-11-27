@@ -1,12 +1,13 @@
 ﻿#include "Entity.h"
 
+Entity::~Entity() = default;
+
 Vector2 Entity::get_position() const
 {
     return position_;
 }
 
-Vector2 Entity::get_center_position() const
+Vector2 Entity::get_center_position()
 {
-    // todo fix
-    return position_ / 2;
+    return Vector2::zero;
 }

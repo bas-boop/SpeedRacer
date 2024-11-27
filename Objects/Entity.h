@@ -5,9 +5,11 @@
 class Entity
 {
 public:
+    virtual ~Entity();
+    
     Vector2 get_position() const;
-    Vector2 get_center_position() const;
+    virtual  Vector2 get_center_position();
     
 private:
-    Vector2 position_ = Vector2(0,0);
+    Vector2 position_ = Vector2::zero;
 };

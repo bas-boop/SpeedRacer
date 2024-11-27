@@ -45,30 +45,30 @@ void Game::loop_game()
             }
         }
         
-        int input = 0;
+        Vector2 a(0,0);
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            input = -10;
+            a.x = -50;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            input = 10;
+            a.x = 50;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            input = -50;
+            a.y = -50;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            input = 50;
+            a.y = 50;
         }
 
-        // if (delta_time() >= 5)
-        // {
-        //     window_.close();
-        //     return;
-        // }
+        if (delta_time() >= 5)
+        {
+            window_.close();
+            return;
+        }
     
         shape_.setRadius(shape_.getRadius() + delta_time());
 
@@ -77,9 +77,9 @@ void Game::loop_game()
 
         // Calculate the center of the window
         const Vector2 center(screen_size_.x / 2, screen_size_.y / 2);
-
+        
         // Position the shape at the center of the window
-        shape_.setPosition(center.x + input, center.y + input);
+        shape_.setPosition(center.x + a.x, center.y + a.y);
         
         window_.clear(background_color_);
         window_.draw(shape_);
