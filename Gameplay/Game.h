@@ -1,6 +1,8 @@
 ﻿#pragma once
+#include "Player.h"
 #include "SFML/Graphics.hpp"
 #include "../Math/Vector2.h"
+#include "../Objects/Sprite.h"
 
 class Game
 {
@@ -18,7 +20,12 @@ private:
     sf::Color background_color_;
     const sf::Uint64 background_color_value_ = 80;
     sf::Clock clock_;
-    sf::CircleShape shape_;
+
+    Sprite test_;
+    sf::Font font_;
+    sf::Text text_;
+    
+    Player player_;
 
     Vector2 screen_size_ = Vector2(1280, 720);
 };

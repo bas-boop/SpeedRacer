@@ -5,11 +5,14 @@
 class Entity
 {
 public:
+    Entity();
     virtual ~Entity();
     
-    Vector2 get_position() const;
-    virtual  Vector2 get_center_position();
+    virtual Vector2 get_position() const;
+    virtual Vector2 get_center_position();
+
+    virtual void set_position(Vector2& target_pos);
     
-private:
+protected:
     Vector2 position_ = Vector2::zero;
 };

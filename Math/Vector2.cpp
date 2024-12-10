@@ -14,6 +14,12 @@ Vector2::Vector2(const float x, const float y)
     this->y = y;
 }
 
+Vector2::Vector2(const Vector2& v)
+{
+    this->x = v.x;
+    this->y = v.y;
+}
+
 Vector2 Vector2::zero = {0, 0};
 
 Vector2 Vector2::one = {1, 1};
@@ -188,4 +194,9 @@ Vector2 Vector2::normalize() const
 {
     const float m = magnitude();
     return Vector2(this->x / m, this->y / m);
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector2& vector2)
+{
+    return os << "(" << vector2.x << ", " << vector2.y << ")";
 }
