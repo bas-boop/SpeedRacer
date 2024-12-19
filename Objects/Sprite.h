@@ -3,16 +3,23 @@
 
 #include "Entity.h"
 
-class Sprite : Entity
+class Sprite : public Entity
 {
 public:
     Sprite();
-    
-    void draw_self(sf::RenderWindow& w);
+    virtual ~Sprite();
+
+    void virtual draw_self(sf::RenderWindow& w);
 
     Vector2 get_position() const override;
+    Vector2 get_center_position() const override;
+    sf::Sprite get_sprite() const;
+
     void set_position(Vector2& target_pos) override;
-    
+
+protected:
+    std::string sprite_path_ = "Assets/Cucumber.png";
+
 private:
     sf::Texture texture_;
     sf::Sprite sprite_;

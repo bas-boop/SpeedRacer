@@ -21,7 +21,7 @@ private:
     const sf::Uint64 background_color_value_ = 80;
     sf::Clock clock_;
 
-    Sprite test_;
+    // std::vector<Sprite> sprites_;
     sf::Font font_;
     sf::Text text_;
     

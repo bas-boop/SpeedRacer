@@ -1,6 +1,5 @@
 ﻿#include "Game.h"
 #include "Player.h"
-#include "../Objects/Sprite.h"
 
 #include <iostream>
 
@@ -35,12 +34,6 @@ void Game::start_game()
     text_.setString("Speed Racer");
     text_.setCharacterSize(24);
     text_.setFillColor(sf::Color::Black);
-
-    Vector2 a(100, -200);
-        
-    test_.set_position(a);
-    
-    player_ = Player();
 }
 
 void Game::loop_game()
@@ -64,19 +57,18 @@ void Game::loop_game()
             return;
         }
         
-        // player_.update();
+        player_.update();
 
         window_.clear(background_color_);
 
-        Vector2 a(test_.get_position() + Vector2::one);
-        test_.set_position(a);
+        // for (int i = 0; i < sprites_.size(); ++i)
+        // {
+        //     window_.draw(sprites_.at(i).get_sprite());
+        // }
         
-        test_.draw_self(window_);
-
-        std::cout << test_.get_position() << "\n";
+        player_.draw_self(window_);
         
         window_.draw(text_);
-
         window_.display();
     }
 }

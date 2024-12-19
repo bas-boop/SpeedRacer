@@ -9,7 +9,7 @@ public:
     virtual ~Entity();
     
     virtual Vector2 get_position() const;
-    virtual Vector2 get_center_position();
+    virtual Vector2 get_center_position() const;
 
     virtual void set_position(Vector2& target_pos);
     

@@ -9,7 +9,7 @@ Vector2 Entity::get_position() const
     return position_;
 }
 
-Vector2 Entity::get_center_position()
+Vector2 Entity::get_center_position() const
 {
     return Vector2::zero;
 }
