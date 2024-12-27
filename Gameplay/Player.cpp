@@ -1,32 +1,29 @@
 ﻿#include "Player.h"
 
-#include <iostream>
 #include <SFML/Window/Keyboard.hpp>
 
 Player::Player()
 {
-    // sprite_path_ = "bla bal";
+    sprite_.set_sprite_path("Assets/Player.png");
     position_.y = start_height_;
     position_ = Vector2::half;
-
-    std::cout << sprite_path_ << "\n";
 }
 
 Player::~Player() = default;
 
 Vector2 Player::get_position() const
 {
-    return Sprite::get_position();
+    return Entity::get_position();
 }
 
 Vector2 Player::get_center_position() const
 {
-    return Sprite::get_center_position();
+    return Entity::get_center_position();
 }
 
 void Player::draw_self(sf::RenderWindow& w)
 {
-    Sprite::draw_self(w);
+    sprite_.draw_self(w);
 }
 
 void Player::update()
@@ -39,9 +36,10 @@ void Player::update()
         input = -1;
 
     position_.x -= input * speed_;
+    sprite_.set_position(position_);
 }
 
 void Player::set_position(Vector2& target_pos)
 {
-    Sprite::set_position(target_pos);
+    Entity::set_position(target_pos);
 }

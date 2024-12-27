@@ -5,12 +5,7 @@
 
 Sprite::Sprite()
 {
-    if (!texture_.loadFromFile(sprite_path_))
-    {
-        std::cerr << "Failed to load texture! - " << this << "\n";
-    }
-    
-    sprite_.setTexture(texture_);
+    set_texture();
 }
 
 Sprite::~Sprite() = default;
@@ -39,4 +34,20 @@ sf::Sprite Sprite::get_sprite() const
 void Sprite::set_position(Vector2& target_pos)
 {
     Entity::set_position(target_pos);
+}
+
+void Sprite::set_sprite_path(std::string path)
+{
+    sprite_path_ = path;
+    set_texture();
+}
+
+void Sprite::set_texture()
+{
+    if (!texture_.loadFromFile(sprite_path_))
+    {
+        std::cerr << "Failed to load texture! - " << this << "\n";
+    }
+    
+    sprite_.setTexture(texture_);
 }

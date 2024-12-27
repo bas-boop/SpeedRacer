@@ -17,10 +17,12 @@ public:
 
     void set_position(Vector2& target_pos) override;
 
-protected:
-    std::string sprite_path_ = "Assets/Cucumber.png";
+    void set_sprite_path(std::string path);
 
 private:
+    void set_texture();
+    
+    std::string sprite_path_ = "Assets/Cucumber.png";
     sf::Texture texture_;
     sf::Sprite sprite_;
 };
