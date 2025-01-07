@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "Player.h"
+#include "Road.h"
 #include "SFML/Graphics.hpp"
 #include "../Math/Vector2.h"
-#include "../Objects/Sprite.h"
 
 class Game
 {
@@ -27,5 +27,10 @@ private:
     
     Player player_;
 
+    // how to give a number with this?
+    Road road1_;
+    Road road2_;
+    Road road3_;
+    
     Vector2 screen_size_ = Vector2(1280, 720);
 };

@@ -4,6 +4,9 @@
 #include <iostream>
 
 Game::Game()
+    : road1_(0),
+      road2_(-400),
+      road3_(-800)
 {
     start_game();
 }
@@ -51,12 +54,15 @@ void Game::loop_game()
             }
         }
 
-        if (delta_time() >= 5)
-        {
-            window_.close();
-            return;
-        }
-        
+        // if (delta_time() >= 5)
+        // {
+        //     window_.close();
+        //     return;
+        // }
+
+        road1_.update();
+        road2_.update();
+        road3_.update();
         player_.update();
 
         window_.clear(background_color_);
@@ -66,6 +72,9 @@ void Game::loop_game()
         //     window_.draw(sprites_.at(i).get_sprite());
         // }
         
+        road1_.draw_self(window_);
+        road2_.draw_self(window_);
+        road3_.draw_self(window_);
         player_.draw_self(window_);
         
         window_.draw(text_);
