@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Others.h"
+
 Vector2::Vector2()
 {
     this->x = zero.x;
@@ -185,9 +187,25 @@ Vector2& Vector2::operator/=(const float f)
 
 #pragma endregion FloatOperator
 
+Vector2 Vector2::operator-(const Vector2& other) const
+{
+    return Vector2(x - other.x, y - other.y);
+}
+
+bool Vector2::operator==(const Vector2& other) const
+{
+    return x == other.x
+        && y == other.y;
+}
+
 float Vector2::magnitude() const
 {
-    return std::sqrt(x * x + y * y);
+    return Others::sqrt(x * x + y * y);
+}
+
+float Vector2::magnitude_squared() const
+{
+    return x * x + y * y;
 }
 
 Vector2 Vector2::normalize() const

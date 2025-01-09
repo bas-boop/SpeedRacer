@@ -12,6 +12,7 @@ public:
     virtual Vector2 get_center_position() const;
 
     virtual void set_position(Vector2& target_pos);
+    virtual void set_position(const Vector2& target_pos);
     
 protected:
     Vector2 position_ = Vector2::zero;

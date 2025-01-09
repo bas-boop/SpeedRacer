@@ -1,0 +1,16 @@
+﻿#pragma once
+#include "../Objects/Entity.h"
+
+class Collider final : Entity
+{
+public:
+    Collider();
+    explicit Collider(float radius_target);
+    
+    bool is_colliding(const Collider& other) const;
+    void set_position(Vector2& vector2) override;
+    void set_position(const Vector2& vector2) override;
+
+private:
+    float radius_ = 1; 
+};

@@ -26,8 +26,6 @@ private:
     sf::Text text_;
     
     Player player_;
-
-    // how to give a number with this?
     Road road1_;
     Road road2_;
     Road road3_;

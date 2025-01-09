@@ -1,31 +1,21 @@
+#include <iostream>
+
 #include "Gameplay/Game.h"
+#include "Math/Collider.h"
 
 int main()
 {
+	Collider a;
+	Collider b;
+	Vector2 p = Vector2(0, 2);
+	
+	b.set_position(p);
+
+	if (a.is_colliding(b))
+		std::cout << "true\n";
+	else
+		std::cout << "false\n";
+	
 	Game game;
 	game.loop_game();
-
-	
-	
-
-
-
-	
-
-
-
-	// cout << Vector2::zero << "\n";
-	// Vector2 a(2, 7);
-	// const Vector2 b(2, 356);
-	// const Vector2* c =  new Vector2(6, 3);
-	//
-	// cout << a << "\n";
-	//
-	// a += c;
-	// a += b;
-	//
-	// cout << c << "\n";
-	// delete c;
-	// cout << b << "\n";
-	// cout << a << "\n";
 }
