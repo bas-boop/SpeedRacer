@@ -10,7 +10,8 @@ public:
     bool is_colliding(const Collider& other) const;
     void set_position(Vector2& vector2) override;
     void set_position(const Vector2& vector2) override;
+    void set_radius(float target);
 
 private:
-    float radius_ = 1; 
+    float radius_ = 0.5f; 
 };

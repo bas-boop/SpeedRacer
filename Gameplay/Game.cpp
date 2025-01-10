@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "Hitable.h"
+
 Game::Game()
     : road1_(0),
       road2_(-400),
@@ -60,10 +62,13 @@ void Game::loop_game()
         //     return;
         // }
 
+        Hitable h;
+        
         road1_.update();
         road2_.update();
         road3_.update();
         player_.update();
+        player_.handel_collision(h.get_collider());
 
         window_.clear(background_color_);
 
@@ -76,6 +81,7 @@ void Game::loop_game()
         road2_.draw_self(window_);
         road3_.draw_self(window_);
         player_.draw_self(window_);
+        h.draw(window_);
         
         window_.draw(text_);
         window_.display();
