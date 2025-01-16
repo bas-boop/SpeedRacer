@@ -1,8 +1,8 @@
 ﻿#include "../Gameplay/Game.h"
-#include "Others.h"
+#include "Basics.h"
 
 // based on NewtonRaphson
-float Others::sqrt(const float n)
+float Basics::sqrt(const float n)
 {
     if (n < 0)
         return -1;

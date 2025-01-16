@@ -48,4 +48,5 @@ struct Vector2
     Vector2 normalize() const;
     
     friend std::ostream& operator<<(std::ostream& os, const Vector2& vector2);
+    const Vector2 operator+(const Vector2& vector2) const;
 };

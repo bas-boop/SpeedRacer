@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Hitable.h"
+#include "../Math/Force.h"
 
 Game::Game()
     : road1_(0),
@@ -28,8 +29,9 @@ void Game::start_game()
     background_color_.r = background_color_value_;
     background_color_.g = background_color_value_;
     background_color_.b = background_color_value_;
-
+    
     clock_.restart();
+    force.clock.restart();
 
     if (!font_.loadFromFile("Assets/ArcadeNormal-ZDZ.ttf"))
     {
@@ -67,7 +69,7 @@ void Game::loop_game()
         road1_.update();
         road2_.update();
         road3_.update();
-        player_.update();
+        player_.update(force);
         player_.handel_collision(h.get_collider());
 
         window_.clear(background_color_);

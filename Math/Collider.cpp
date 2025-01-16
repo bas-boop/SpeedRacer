@@ -11,11 +11,8 @@ bool Collider::is_colliding(const Collider& other) const
 {
     if (other.position_ == position_)
         return true;
-    
-    if ((position_ - other.position_).magnitude() <= radius_ + other.radius_)
-        return true;
-    
-    return false;
+
+    return (position_ - other.position_).magnitude() <= radius_ + other.radius_;
 }
 
 void Collider::set_position(Vector2& vector2)

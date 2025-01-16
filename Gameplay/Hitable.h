@@ -19,6 +19,7 @@ public:
     void set_radius(float target);
 private:
     Collider collider_;
-
     sf::CircleShape circle_;
+
+    bool should_show_ = true;
 };

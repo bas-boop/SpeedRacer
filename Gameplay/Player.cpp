@@ -3,6 +3,8 @@
 #include <iostream>
 #include <SFML/Window/Keyboard.hpp>
 
+#include "../Math/Force.h"
+
 Player::Player()
 {
     sprite_.set_sprite_path("Assets/Player.png");
@@ -37,16 +39,41 @@ void Player::handel_collision(const Collider& other)
     }
 }
 
-void Player::update()
+void Player::update(const Force force)
 {
-    int input = 0;
+    Vector2 input = Vector2::zero;
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        input = 1;
+        input.x = -0.1f;
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        input = -1;
+        input.x = 0.1f;
 
-    position_.x -= input * speed_;
+    std::cout << "Input: " << input << "\n";
+    
+    const Vector2 acceleration = input * speed_;  
+    // std::cout << "Acceleration: " << acceleration << "\n";
+    
+    Vector2 new_velocity = force.add_force(position_, veclocity_, acceleration);
+    new_velocity.y = 0; 
+
+    std::cout << "Force-Adjusted Velocity: " << new_velocity << "\n";
+    
+    const float max_velocity = 50.0f;
+    std::cout << "magnitude: " << new_velocity.magnitude() << "\n"; // magnitude keeps on growing and growing when input
+
+    if (new_velocity.magnitude() > max_velocity)
+        new_velocity = new_velocity.normalize() * input.x * max_velocity;
+
+    if (input == Vector2::zero)
+        new_velocity = Vector2::zero;
+
+    // std::cout << "Velocity after Friction: " << new_velocity << "\n";
+    
+    veclocity_ = new_velocity;
+    position_ += veclocity_;
+
+    // std::cout << "Updated Position: " << position_ << "\n";
+
     sprite_.set_position(position_);
     hitable_.set_position(position_);
 }

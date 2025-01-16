@@ -17,7 +17,9 @@ Collider Hitable::get_collider()
 void Hitable::draw(sf::RenderWindow& window)
 {
     circle_.setPosition(position_.x, position_.y);
-    window.draw(circle_);
+
+    if (should_show_)
+        window.draw(circle_);
 }
 
 void Hitable::set_position(Vector2& target_pos)

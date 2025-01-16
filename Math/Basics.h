@@ -1,7 +1,6 @@
 ﻿#pragma once
 
-// todo: rename to something better
-class Others
+class Basics
 {
 public:
     // based on NewtonRaphson

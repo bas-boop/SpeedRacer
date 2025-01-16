@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Player.h"
 #include "Road.h"
+#include "../Math/Force.h"
 #include "SFML/Graphics.hpp"
 #include "../Math/Vector2.h"
 
@@ -15,11 +16,14 @@ public:
     static void end_game();
     float delta_time() const;
 
+    Force force;
+    
 private:
     sf::RenderWindow window_;
     sf::Color background_color_;
     const sf::Uint64 background_color_value_ = 80;
     sf::Clock clock_;
+    // static sf::Clock clock_2;
 
     // std::vector<Sprite> sprites_;
     sf::Font font_;
