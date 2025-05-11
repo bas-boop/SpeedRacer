@@ -2,13 +2,15 @@
 
 #include <iostream>
 
-
 Sprite::Sprite()
 {
     set_texture();
 }
 
-Sprite::~Sprite() = default;
+Sprite::~Sprite()
+{
+    Entity::~Entity();
+}
 
 void Sprite::draw_self(sf::RenderWindow& w)
 {
@@ -31,7 +33,7 @@ sf::Sprite Sprite::get_sprite() const
     return sprite_;
 }
 
-void Sprite::set_position(Vector2& target_pos)
+void Sprite::set_position(const Vector2& target_pos)
 {
     Entity::set_position(target_pos);
 }

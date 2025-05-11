@@ -46,7 +46,8 @@ struct Vector2
     float magnitude_squared() const;
     
     Vector2 normalize() const;
+    Vector2 inverted() const;
     
     friend std::ostream& operator<<(std::ostream& os, const Vector2& vector2);
-    const Vector2 operator+(const Vector2& vector2) const;
+    Vector2 operator+(const Vector2& vector2) const;
 };

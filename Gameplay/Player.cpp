@@ -3,26 +3,30 @@
 #include <iostream>
 #include <SFML/Window/Keyboard.hpp>
 
-#include "../Math/Force.h"
+#include "../Math/ForceBody.h"
 
 Player::Player()
 {
     sprite_.set_sprite_path("Assets/Player.png");
-    position_ = Vector2::half;
-    position_.y = start_height_;
+    Vector2 a (0.5f, start_height_);
+    set_position(a);
     hitable_.set_radius(7);
+    speed_ = speed;
 }
 
-Player::~Player() = default;
+Player::~Player()
+{
+    ForceBody::~ForceBody();
+}
 
 Vector2 Player::get_position() const
 {
-    return Entity::get_position();
+    return ForceBody::get_position();
 }
 
 Vector2 Player::get_center_position() const
 {
-    return Entity::get_center_position();
+    return ForceBody::get_center_position();
 }
 
 void Player::draw_self(sf::RenderWindow& w)
@@ -39,46 +43,27 @@ void Player::handel_collision(const Collider& other)
     }
 }
 
-void Player::update(const Force force)
+void Player::update()
 {
     Vector2 input = Vector2::zero;
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        input.x = -0.1f;
+        input.x = -1;
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        input.x = 0.1f;
+        input.x = 1;
 
     std::cout << "Input: " << input << "\n";
-    
-    const Vector2 acceleration = input * speed_;  
-    // std::cout << "Acceleration: " << acceleration << "\n";
-    
-    Vector2 new_velocity = force.add_force(position_, veclocity_, acceleration);
-    new_velocity.y = 0; 
 
-    std::cout << "Force-Adjusted Velocity: " << new_velocity << "\n";
-    
-    const float max_velocity = 50.0f;
-    std::cout << "magnitude: " << new_velocity.magnitude() << "\n"; // magnitude keeps on growing and growing when input
+    add_force(input * 5);
+    update_physics();
 
-    if (new_velocity.magnitude() > max_velocity)
-        new_velocity = new_velocity.normalize() * input.x * max_velocity;
+    std::cout << "pos: " << ForceBody::get_position() << "\n";
 
-    if (input == Vector2::zero)
-        new_velocity = Vector2::zero;
-
-    // std::cout << "Velocity after Friction: " << new_velocity << "\n";
-    
-    veclocity_ = new_velocity;
-    position_ += veclocity_;
-
-    // std::cout << "Updated Position: " << position_ << "\n";
-
-    sprite_.set_position(position_);
-    hitable_.set_position(position_);
+    sprite_.set_position(ForceBody::get_position());
+    hitable_.set_position(ForceBody::get_position());
 }
 
-void Player::set_position(Vector2& target_pos)
+void Player::set_position(const Vector2& target_pos)
 {
-    Entity::set_position(target_pos);
+    ForceBody::set_position(target_pos);
 }

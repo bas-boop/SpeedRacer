@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Basics
+class MathUtils
 {
 public:
     // based on NewtonRaphson

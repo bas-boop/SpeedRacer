@@ -4,9 +4,9 @@
 #include "Hitable.h"
 #include "../Objects/Sprite.h"
 #include "../Math/Collider.h"
-#include "../Math/Force.h"
+#include "../Math/ForceBody.h"
 
-class Player final : Entity
+class Player final : public ForceBody
 {
 public:
     Player();
@@ -17,8 +17,10 @@ public:
     void draw_self(sf::RenderWindow& w);
     void handel_collision(const Collider& other);
 
-    void update(Force force);
-    void set_position(Vector2& target_pos) override;
+    void update();
+    void set_position(const Vector2& target_pos) override;
+
+    sf::Clock clock = ForceBody::clock;
 
 private:
     sf::CircleShape shape_;
@@ -26,6 +28,6 @@ private:
     Hitable hitable_;
     Vector2 veclocity_;
 
-    float speed_ = 0.001f;
+    float speed = 10;
     float start_height_ = 100;
 };

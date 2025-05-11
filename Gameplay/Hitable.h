@@ -9,11 +9,11 @@ class Hitable : Entity
 {
 public:
     Hitable();
+    ~Hitable();
     
     Collider get_collider();
     void draw(sf::RenderWindow& window);
     
-    void set_position(Vector2& target_pos) override;
     void set_position(const Vector2& target_pos) override;
 
     void set_radius(float target);

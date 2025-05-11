@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Player.h"
 #include "Road.h"
-#include "../Math/Force.h"
+#include "../Math/ForceBody.h"
 #include "SFML/Graphics.hpp"
 #include "../Math/Vector2.h"
 
@@ -15,8 +15,6 @@ public:
     void loop_game();
     static void end_game();
     float delta_time() const;
-
-    Force force;
     
 private:
     sf::RenderWindow window_;

@@ -9,6 +9,11 @@ Hitable::Hitable()
     circle_.setPosition(position_.x, position_.y);
 }
 
+Hitable::~Hitable()
+{
+    Entity::~Entity();
+}
+
 Collider Hitable::get_collider()
 {
     return collider_;
@@ -22,14 +27,9 @@ void Hitable::draw(sf::RenderWindow& window)
         window.draw(circle_);
 }
 
-void Hitable::set_position(Vector2& target_pos)
-{
-    collider_.set_position(target_pos);
-    Entity::set_position(target_pos);
-}
-
 void Hitable::set_position(const Vector2& target_pos)
 {
+    collider_.set_position(target_pos);
     Entity::set_position(target_pos);
 }
 

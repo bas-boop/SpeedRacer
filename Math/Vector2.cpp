@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "Basics.h"
+#include "MathUtils.h"
 
 Vector2::Vector2()
 {
@@ -200,7 +200,7 @@ bool Vector2::operator==(const Vector2& other) const
 
 float Vector2::magnitude() const
 {
-    return Basics::sqrt(x * x + y * y);
+    return MathUtils::sqrt(x * x + y * y);
 }
 
 float Vector2::magnitude_squared() const
@@ -211,10 +211,19 @@ float Vector2::magnitude_squared() const
 Vector2 Vector2::normalize() const
 {
     const float m = magnitude();
+
+    if (m < 1e-6f)
+        return zero;
+    
     return Vector2(this->x / m, this->y / m);
 }
 
-const Vector2 Vector2::operator+(const Vector2& vector2) const
+Vector2 Vector2::inverted() const
+{
+    return Vector2(this->x * -1, this->y * -1);
+}
+
+Vector2 Vector2::operator+(const Vector2& vector2) const
 {
     return Vector2(this->x + vector2.x, this->y + vector2.y);
 }

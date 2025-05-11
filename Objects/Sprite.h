@@ -15,7 +15,7 @@ public:
     Vector2 get_center_position() const override;
     sf::Sprite get_sprite() const;
 
-    void set_position(Vector2& target_pos) override;
+    void set_position(const Vector2& target_pos) override;
 
     void set_sprite_path(std::string path);
 

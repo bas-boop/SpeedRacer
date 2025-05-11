@@ -12,6 +12,11 @@ Road::Road(const float target_start_height)
     position_.y = -target_start_height;
 }
 
+Road::~Road()
+{
+    Entity::~Entity();
+}
+
 void Road::update()
 {
     position_.y += speed_;
