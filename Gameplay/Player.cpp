@@ -8,10 +8,10 @@
 Player::Player()
 {
     sprite_.set_sprite_path("Assets/Player.png");
-    Vector2 a (0.5f, start_height_);
-    set_position(a);
-    hitable_.set_radius(7);
-    speed_ = speed;
+    const Vector2 start_position (0.5f, start_height_);
+    set_position(start_position);
+    hittable_.set_radius(7);
+    current_speed_ = speed_;
 }
 
 Player::~Player()
@@ -32,12 +32,12 @@ Vector2 Player::get_center_position() const
 void Player::draw_self(sf::RenderWindow& w)
 {
     sprite_.draw_self(w);
-    hitable_.draw(w);
+    hittable_.draw(w);
 }
 
 void Player::handel_collision(const Collider& other)
 {
-    if (hitable_.get_collider().is_colliding(other))
+    if (hittable_.get_collider().is_colliding(other))
     {
         std::cout << "collision \n";
     }
@@ -47,20 +47,17 @@ void Player::update()
 {
     Vector2 input = Vector2::zero;
     
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        input.x = -1;
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        input.x = 1;
+    input.x = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) - sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
+    //input.y = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) - sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+    
+    if (input.x != 0)
+        input = input.normalize();
 
-    std::cout << "Input: " << input << "\n";
-
-    add_force(input * 5);
+    add_force(input);
     update_physics();
-
-    std::cout << "pos: " << ForceBody::get_position() << "\n";
-
-    sprite_.set_position(ForceBody::get_position());
-    hitable_.set_position(ForceBody::get_position());
+    
+    sprite_.set_position(get_position());
+    hittable_.set_position(get_position());
 }
 
 void Player::set_position(const Vector2& target_pos)

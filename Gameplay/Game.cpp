@@ -3,13 +3,17 @@
 
 #include <iostream>
 
-#include "Hitable.h"
+#include "Hittable.h"
+#include "Obstacle.h"
 #include "../Math/ForceBody.h"
 
 Game::Game()
-    : road1_(0),
-      road2_(-400),
-      road3_(-800)
+    :   road1_(0),
+        road2_(-400),
+        road3_(-800),
+        obstacle1_(Vector2(0.2f, 0)),
+        obstacle2_(Vector2(0, 400)),
+        obstacle3_(Vector2(1200, 800))
 {
     start_game();
 }
@@ -29,9 +33,9 @@ void Game::start_game()
     background_color_.r = background_color_value_;
     background_color_.g = background_color_value_;
     background_color_.b = background_color_value_;
-    
+
+    player_.clock = clock_;
     clock_.restart();
-    player_.clock.restart();
 
     if (!font_.loadFromFile("Assets/ArcadeNormal-ZDZ.ttf"))
     {
@@ -64,16 +68,22 @@ void Game::loop_game()
         //     return;
         // }
 
-        Hitable h;
+        //Hittable h;
         
         road1_.update();
         road2_.update();
         road3_.update();
         player_.update();
-        player_.handel_collision(h.get_collider());
+        obstacle1_.update();
+        obstacle2_.update();
+        obstacle3_.update();
+        
+        player_.handel_collision(obstacle1_.get_collider());
+        player_.handel_collision(obstacle2_.get_collider());
+        player_.handel_collision(obstacle3_.get_collider());
 
         window_.clear(background_color_);
-
+        
         // for (int i = 0; i < sprites_.size(); ++i)
         // {
         //     window_.draw(sprites_.at(i).get_sprite());
@@ -83,7 +93,10 @@ void Game::loop_game()
         road2_.draw_self(window_);
         road3_.draw_self(window_);
         player_.draw_self(window_);
-        h.draw(window_);
+        //h.draw(window_);
+        obstacle1_.draw_self(window_);
+        obstacle2_.draw_self(window_);
+        obstacle3_.draw_self(window_);
         
         window_.draw(text_);
         window_.display();

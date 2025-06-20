@@ -1,6 +1,9 @@
 ﻿#include "Entity.h"
 
-Entity::Entity() = default;
+Entity::Entity()
+{
+    position_ = Vector2::zero;
+}
 
 Entity::~Entity() = default;
 

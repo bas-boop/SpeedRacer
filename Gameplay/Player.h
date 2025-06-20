@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <SFML/Graphics/CircleShape.hpp>
 
-#include "Hitable.h"
+#include "Hittable.h"
 #include "../Objects/Sprite.h"
 #include "../Math/Collider.h"
 #include "../Math/ForceBody.h"
@@ -25,9 +25,9 @@ public:
 private:
     sf::CircleShape shape_;
     Sprite sprite_;
-    Hitable hitable_;
-    Vector2 veclocity_;
+    Hittable hittable_;
+    Vector2 velocity_;
 
-    float speed = 10;
-    float start_height_ = 100;
+    float speed_ = 50;
+    float start_height_ = 600;
 };

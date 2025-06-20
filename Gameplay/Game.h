@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Obstacle.h"
 #include "Player.h"
 #include "Road.h"
 #include "../Math/ForceBody.h"
@@ -31,6 +32,9 @@ private:
     Road road1_;
     Road road2_;
     Road road3_;
+    Obstacle obstacle1_;
+    Obstacle obstacle2_;
+    Obstacle obstacle3_;
     
     Vector2 screen_size_ = Vector2(1280, 720);
 };

@@ -5,11 +5,11 @@
 #include "../Objects/Entity.h"
 #include "../Math/Collider.h"
 
-class Hitable : Entity
+class Hittable : Entity
 {
 public:
-    Hitable();
-    ~Hitable();
+    Hittable();
+    ~Hittable();
     
     Collider get_collider();
     void draw(sf::RenderWindow& window);

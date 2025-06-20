@@ -1,5 +1,7 @@
 ﻿#include "../Gameplay/Game.h"
 #include "MathUtils.h"
+#include <random>
+
 
 // based on NewtonRaphson
 float MathUtils::sqrt(const float n)
@@ -26,4 +28,12 @@ float MathUtils::sqrt(const float n)
     }
     
     return root;
+}
+
+float MathUtils::get_random(float min, float max)
+{
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> dist(min, max);
+    return dist(gen);
 }

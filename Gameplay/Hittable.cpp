@@ -1,6 +1,6 @@
-﻿#include "Hitable.h"
+﻿#include "Hittable.h"
 
-Hitable::Hitable()
+Hittable::Hittable()
 {
     position_ = Vector2(400,100);
     collider_.set_position(position_);
@@ -9,17 +9,17 @@ Hitable::Hitable()
     circle_.setPosition(position_.x, position_.y);
 }
 
-Hitable::~Hitable()
+Hittable::~Hittable()
 {
     Entity::~Entity();
 }
 
-Collider Hitable::get_collider()
+Collider Hittable::get_collider()
 {
     return collider_;
 }
 
-void Hitable::draw(sf::RenderWindow& window)
+void Hittable::draw(sf::RenderWindow& window)
 {
     circle_.setPosition(position_.x, position_.y);
 
@@ -27,13 +27,13 @@ void Hitable::draw(sf::RenderWindow& window)
         window.draw(circle_);
 }
 
-void Hitable::set_position(const Vector2& target_pos)
+void Hittable::set_position(const Vector2& target_pos)
 {
     collider_.set_position(target_pos);
     Entity::set_position(target_pos);
 }
 
-void Hitable::set_radius(const float target)
+void Hittable::set_radius(const float target)
 {
     collider_.set_radius(target);
 }

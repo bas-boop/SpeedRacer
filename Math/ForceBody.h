@@ -4,12 +4,12 @@
 #include "Vector2.h"
 #include "../Objects/Entity.h"
 
-class ForceBody : Entity
+class ForceBody : public Entity
 {
 public:
+    ForceBody() = default;
     ~ForceBody() override;
     
-    Vector2 add_force(const Vector2& inital_position, const Vector2 initial_velocity, const Vector2 acceratation) const; // unused
     void add_force(const Vector2&);
     void set_force(const Vector2&);
     void update_physics();
@@ -22,17 +22,15 @@ public:
     Vector2 current_force = Vector2::zero;
 
 protected:
-    float speed_ = 2.5f;    
+    float current_speed_ = 2.5f;    
     
 private:
     Vector2 acceleration() const;
     
-    Vector2 velocity_ = Vector2::zero;
-    float max_speed_ = 10;
-
     float mass_ = 1;
     float friction_ = 0.1f;
 
+    Vector2 velocity_ = Vector2::zero;
     Vector2 acceleration_ = Vector2::zero;
     Vector2 grafity_ = Vector2::zero;
 };
