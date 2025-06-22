@@ -8,12 +8,12 @@
 #include "../Math/ForceBody.h"
 
 Game::Game()
-    :   road1_(0),
-        road2_(-400),
-        road3_(-800),
-        obstacle1_(Vector2(0.2f, 0)),
-        obstacle2_(Vector2(0, 400)),
-        obstacle3_(Vector2(1200, 800))
+    : road1_(0),
+      road2_(-400),
+      road3_(-800),
+      obstacle1_(Vector2(0.2f, 0)),
+      obstacle2_(Vector2(0, 400)),
+      obstacle3_(Vector2(1200, 800))
 {
     start_game();
 }
@@ -52,6 +52,39 @@ void Game::loop_game()
                 return;
             }
         }
+
+        bool a = !is_game_over_ &&
+            (player_.handel_collision(obstacle1_.get_collider())
+            || player_.handel_collision(obstacle2_.get_collider())
+            || player_.handel_collision(obstacle3_.get_collider()));
+
+        std::cout << a << "\n"; // logs 0
+        
+        if (a
+            && score_ > 0)
+        {
+            std::cout << "game done\n";
+            
+            is_game_over_ = true;
+            end_screen_.setup(window_.getSize(), score_);
+        }
+
+        if (is_game_over_)
+        {
+            window_.clear(background_color_);
+            end_screen_.draw(window_);
+            window_.display();
+
+            sf::Event event;
+            while (window_.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed)
+                    window_.close();
+            }
+
+            continue;
+        }
+
         
         road1_.update();
         road2_.update();
@@ -59,11 +92,7 @@ void Game::loop_game()
         player_.update();
         obstacle1_.update();
         obstacle2_.update();
-        obstacle3_.update();
-        
-        player_.handel_collision(obstacle1_.get_collider());
-        player_.handel_collision(obstacle2_.get_collider());
-        player_.handel_collision(obstacle3_.get_collider());
+        obstacle3_.update();        
 
         float player_y = player_.get_position().y;
 

@@ -5,6 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "../Math/Vector2.h"
 #include "../UI/ScoreText.h"
+#include "../UI/EndScreen.h"
 
 class Game
 {
@@ -31,8 +32,10 @@ private:
     Obstacle obstacle2_;
     Obstacle obstacle3_;
 
+    EndScreen end_screen_;
     ScoreText score_text_;
     int score_ = -1;
+    bool is_game_over_ = false;
     
     Vector2 screen_size_ = Vector2(1280, 720);
 };

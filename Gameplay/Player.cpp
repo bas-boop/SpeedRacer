@@ -35,12 +35,9 @@ void Player::draw_self(sf::RenderWindow& w)
     hittable_.draw(w);
 }
 
-void Player::handel_collision(const Collider& other)
+bool Player::handel_collision(const Collider& other)
 {
-    if (hittable_.get_collider().is_colliding(other))
-    {
-        std::cout << "collision \n";
-    }
+    return hittable_.get_collider().is_colliding(other);
 }
 
 void Player::update()

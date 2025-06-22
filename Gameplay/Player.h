@@ -15,7 +15,7 @@ public:
     Vector2 get_position() const override;
     Vector2 get_center_position() const override;
     void draw_self(sf::RenderWindow& w);
-    void handel_collision(const Collider& other);
+    bool handel_collision(const Collider& other);
 
     void update();
     void set_position(const Vector2& target_pos) override;
