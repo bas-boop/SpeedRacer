@@ -38,7 +38,7 @@ void Sprite::set_position(const Vector2& target_pos)
     Entity::set_position(target_pos);
 }
 
-void Sprite::set_sprite_path(std::string path)
+void Sprite::set_sprite_path(const std::string& path)
 {
     sprite_path_ = path;
     set_texture();

@@ -6,7 +6,7 @@ class Collider final : Entity
 public:
     Collider();
     explicit Collider(float radius_target);
-    ~Collider();
+    ~Collider() override;
     
     bool is_colliding(const Collider& other) const;
     void set_position(const Vector2& vector2) override;

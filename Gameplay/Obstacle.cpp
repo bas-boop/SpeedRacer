@@ -10,6 +10,8 @@ Obstacle::Obstacle(const Vector2& spawn_position)
 
     direction_ = spawn_position_.x > 640.0f ? Direction::Left : Direction::Right;
     respawn_position_ = Vector2(spawn_position_.x, replace_position_);
+
+    ForceBody::ForceBody();
 }
 
 Obstacle::~Obstacle()

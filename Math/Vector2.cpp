@@ -1,8 +1,7 @@
 ﻿#include "Vector2.h"
+#include "MathUtils.h"
 
 #include <iostream>
-
-#include "MathUtils.h"
 
 Vector2::Vector2()
 {

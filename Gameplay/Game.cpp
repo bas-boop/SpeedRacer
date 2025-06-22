@@ -1,8 +1,7 @@
-﻿#include "Game.h"
+﻿#include <iostream>
+
+#include "Game.h"
 #include "Player.h"
-
-#include <iostream>
-
 #include "Hittable.h"
 #include "Obstacle.h"
 #include "../Math/ForceBody.h"
@@ -53,76 +52,8 @@ void Game::loop_game()
             }
         }
 
-        bool a = !is_game_over_ &&
-            (player_.handel_collision(obstacle1_.get_collider())
-            || player_.handel_collision(obstacle2_.get_collider())
-            || player_.handel_collision(obstacle3_.get_collider()));
-
-        std::cout << a << "\n"; // logs 0
-        
-        if (a
-            && score_ > 0)
-        {
-            std::cout << "game done\n";
-            
-            is_game_over_ = true;
-            end_screen_.setup(window_.getSize(), score_);
-        }
-
-        if (is_game_over_)
-        {
-            window_.clear(background_color_);
-            end_screen_.draw(window_);
-            window_.display();
-
-            sf::Event event;
-            while (window_.pollEvent(event))
-            {
-                if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed)
-                    window_.close();
-            }
-
-            continue;
-        }
-
-        
-        road1_.update();
-        road2_.update();
-        road3_.update();
-        player_.update();
-        obstacle1_.update();
-        obstacle2_.update();
-        obstacle3_.update();        
-
-        float player_y = player_.get_position().y;
-
-        auto try_score = [&](Obstacle& obs)
-        {
-            if (!obs.has_scored()
-                && obs.get_position().y > player_y)
-            {
-                score_++;
-                score_text_.update(score_);
-                obs.mark_scored();
-            }
-        };
-
-        try_score(obstacle1_);
-        try_score(obstacle2_);
-        try_score(obstacle3_);
-        
-        window_.clear(background_color_);
-        
-        road1_.draw_self(window_);
-        road2_.draw_self(window_);
-        road3_.draw_self(window_);
-        player_.draw_self(window_);
-        obstacle1_.draw_self(window_);
-        obstacle2_.draw_self(window_);
-        obstacle3_.draw_self(window_);
-        
-        score_text_.draw(window_);
-        window_.display();
+        if (update_entities())
+            draw();
     }
 }
 
@@ -134,4 +65,79 @@ void Game::end_game()
 float Game::delta_time() const
 {
     return clock_.getElapsedTime().asSeconds();
+}
+
+bool Game::update_entities()
+{
+    const bool game_can_be_over = !is_game_over_ &&
+            (player_.handel_collision(obstacle1_.get_collider())
+            || player_.handel_collision(obstacle2_.get_collider())
+            || player_.handel_collision(obstacle3_.get_collider()))
+            && score_ > 0;
+    
+    if (game_can_be_over)
+    {            
+        is_game_over_ = true;
+        end_screen_.setup(window_.getSize(), score_);
+    }
+
+    if (is_game_over_)
+    {
+        window_.clear(background_color_);
+        end_screen_.draw(window_);
+        window_.display();
+
+        sf::Event event;
+        while (window_.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed
+                || event.type == sf::Event::KeyPressed)
+                window_.close();
+        }
+
+        return false;
+    }
+        
+    road1_.update();
+    road2_.update();
+    road3_.update();
+    player_.update();
+    obstacle1_.update();
+    obstacle2_.update();
+    obstacle3_.update();
+
+    const float player_y = player_.get_position().y;
+
+    auto try_score = [&](Obstacle& obs)
+    {
+        if (!obs.has_scored()
+            && obs.get_position().y > player_y)
+        {
+            score_++;
+            score_text_.update(score_);
+            obs.mark_scored();
+        }
+    };
+
+    try_score(obstacle1_);
+    try_score(obstacle2_);
+    try_score(obstacle3_);
+
+    return true;
+}
+
+void Game::draw()
+{
+    window_.clear(background_color_);
+        
+    road1_.draw_self(window_);
+    road2_.draw_self(window_);
+    road3_.draw_self(window_);
+    player_.draw_self(window_);
+    obstacle1_.draw_self(window_);
+    obstacle2_.draw_self(window_);
+    obstacle3_.draw_self(window_);
+        
+    score_text_.draw(window_);
+    window_.display();
 }

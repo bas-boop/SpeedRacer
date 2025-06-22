@@ -2,10 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 
-class ScoreText {
+class ScoreText
+{
 public:
     ScoreText();
-    void update(int newScore);
+    void update(int new_score);
     void draw(sf::RenderWindow& window) const;
 
 private:

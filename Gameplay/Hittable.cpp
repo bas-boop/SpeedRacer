@@ -7,16 +7,13 @@ Hittable::Hittable()
     circle_.setFillColor(sf::Color(255,0,0));
     circle_.setRadius(7);
     circle_.setPosition(position_.x, position_.y);
+
+    Entity::Entity();
 }
 
 Hittable::~Hittable()
 {
     Entity::~Entity();
-}
-
-Collider Hittable::get_collider()
-{
-    return collider_;
 }
 
 void Hittable::draw(sf::RenderWindow& window)
@@ -38,3 +35,7 @@ void Hittable::set_radius(const float target)
     collider_.set_radius(target);
 }
 
+Collider Hittable::get_collider()
+{
+    return collider_;
+}

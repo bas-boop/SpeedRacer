@@ -1,10 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class EndScreen {
+class EndScreen
+{
 public:
-    EndScreen(); // Default constructor
-    void setup(const sf::Vector2u& window_size, int score); // New method
+    EndScreen();
+    
+    void setup(const sf::Vector2u& window_size, int score);
     void draw(sf::RenderWindow& window) const;
 
 private:

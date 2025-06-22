@@ -13,9 +13,9 @@ ScoreText::ScoreText() : score_(0)
     text_.setString("Score: 0");
 }
 
-void ScoreText::update(int newScore)
+void ScoreText::update(const int new_score)
 {
-    score_ = newScore;
+    score_ = new_score;
     text_.setString("Score: " + std::to_string(score_));
 }
 

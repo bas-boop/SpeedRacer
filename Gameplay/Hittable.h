@@ -9,14 +9,14 @@ class Hittable : Entity
 {
 public:
     Hittable();
-    ~Hittable();
+    ~Hittable() override;
+    
+    void draw(sf::RenderWindow& window);
+    void set_position(const Vector2& target_pos) override;
+    void set_radius(float target);
     
     Collider get_collider();
-    void draw(sf::RenderWindow& window);
-    
-    void set_position(const Vector2& target_pos) override;
 
-    void set_radius(float target);
 private:
     Collider collider_;
     sf::CircleShape circle_;

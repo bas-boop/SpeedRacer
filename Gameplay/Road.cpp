@@ -4,12 +4,16 @@ Road::Road()
 {
     sprite_.set_sprite_path("Assets/Cucumber.png");
     position_.y = -10;
+
+    Entity::Entity();
 }
 
 Road::Road(const float target_start_height)
 {
     sprite_.set_sprite_path("Assets/Cucumber.png");
     position_.y = -target_start_height;
+
+    Entity::Entity();
 }
 
 Road::~Road()

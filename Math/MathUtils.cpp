@@ -1,7 +1,7 @@
-﻿#include "../Gameplay/Game.h"
-#include "MathUtils.h"
-#include <random>
+﻿#include <random>
 
+#include "../Gameplay/Game.h"
+#include "MathUtils.h"
 
 // based on NewtonRaphson
 float MathUtils::sqrt(const float n)

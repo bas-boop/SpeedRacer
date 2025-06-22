@@ -1,6 +1,9 @@
 ﻿#include "Collider.h"
 
-Collider::Collider() = default;
+Collider::Collider()
+{
+    Entity::Entity();
+}
 
 Collider::Collider(const float radius_target)
 {

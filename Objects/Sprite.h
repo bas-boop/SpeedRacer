@@ -3,13 +3,13 @@
 
 #include "Entity.h"
 
-class Sprite : public Entity
+class Sprite final : public Entity
 {
 public:
     Sprite();
-    virtual ~Sprite();
+    ~Sprite() override;
 
-    void virtual draw_self(sf::RenderWindow& w);
+    void draw_self(sf::RenderWindow& w);
 
     Vector2 get_position() const override;
     Vector2 get_center_position() const override;
@@ -17,7 +17,7 @@ public:
 
     void set_position(const Vector2& target_pos) override;
 
-    void set_sprite_path(std::string path);
+    void set_sprite_path(const std::string& path);
 
 private:
     void set_texture();

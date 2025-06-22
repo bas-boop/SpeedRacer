@@ -1,8 +1,6 @@
-﻿#include "Player.h"
+﻿#include <SFML/Window/Keyboard.hpp>
 
-#include <iostream>
-#include <SFML/Window/Keyboard.hpp>
-
+#include "Player.h"
 #include "../Math/ForceBody.h"
 
 Player::Player()
@@ -43,9 +41,7 @@ bool Player::handel_collision(const Collider& other)
 void Player::update()
 {
     Vector2 input = Vector2::zero;
-    
     input.x = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) - sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
-    //input.y = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) - sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
     
     if (input.x != 0)
         input = input.normalize();

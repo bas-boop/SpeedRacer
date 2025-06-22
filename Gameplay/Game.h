@@ -17,6 +17,9 @@ public:
     void loop_game();
     static void end_game();
     float delta_time() const;
+
+    bool update_entities();
+    void draw();
     
 private:
     sf::RenderWindow window_;

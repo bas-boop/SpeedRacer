@@ -10,7 +10,7 @@ class Obstacle final : public ForceBody
 {
 public:
     explicit Obstacle(const Vector2& spawn_position);
-    ~Obstacle();
+    ~Obstacle() override;
 
     void update();
     void draw_self(sf::RenderWindow& window);

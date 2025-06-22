@@ -6,8 +6,8 @@ class Road final : Entity
 {
 public:
     Road();
-    Road(float target_start_height);
-    ~Road();
+    explicit Road(float target_start_height);
+    ~Road() override;
     
     void update();
     void draw_self(sf::RenderWindow& w);
