@@ -9,12 +9,16 @@
 class Obstacle final : public ForceBody
 {
 public:
-    Obstacle(const Vector2& spawn_position);
+    explicit Obstacle(const Vector2& spawn_position);
     ~Obstacle();
 
     void update();
     void draw_self(sf::RenderWindow& window);
     Collider get_collider();
+    
+    bool has_scored() const { return has_scored_; }
+    void mark_scored() { has_scored_ = true; }
+    void reset_scored() { has_scored_ = false; }
 
 private:
     enum class Direction { Left, Right };
@@ -34,4 +38,6 @@ private:
     sf::Clock vertical_timer_;
     float vertical_delay_ = 3;
     bool vertical_movement_enabled_ = false;
+    
+    bool has_scored_ = false;
 };

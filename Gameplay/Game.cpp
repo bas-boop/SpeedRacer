@@ -36,15 +36,6 @@ void Game::start_game()
 
     player_.clock = clock_;
     clock_.restart();
-
-    if (!font_.loadFromFile("Assets/ArcadeNormal-ZDZ.ttf"))
-    {
-        std::cerr << "Failed to load font!\n";
-    }
-    text_.setFont(font_);
-    text_.setString("Speed Racer");
-    text_.setCharacterSize(24);
-    text_.setFillColor(sf::Color::Black);
 }
 
 void Game::loop_game()
@@ -61,14 +52,6 @@ void Game::loop_game()
                 return;
             }
         }
-
-        // if (delta_time() >= 5)
-        // {
-        //     window_.close();
-        //     return;
-        // }
-
-        //Hittable h;
         
         road1_.update();
         road2_.update();
@@ -82,23 +65,34 @@ void Game::loop_game()
         player_.handel_collision(obstacle2_.get_collider());
         player_.handel_collision(obstacle3_.get_collider());
 
-        window_.clear(background_color_);
+        float player_y = player_.get_position().y;
+
+        auto try_score = [&](Obstacle& obs)
+        {
+            if (!obs.has_scored()
+                && obs.get_position().y > player_y)
+            {
+                score_++;
+                score_text_.update(score_);
+                obs.mark_scored();
+            }
+        };
+
+        try_score(obstacle1_);
+        try_score(obstacle2_);
+        try_score(obstacle3_);
         
-        // for (int i = 0; i < sprites_.size(); ++i)
-        // {
-        //     window_.draw(sprites_.at(i).get_sprite());
-        // }
+        window_.clear(background_color_);
         
         road1_.draw_self(window_);
         road2_.draw_self(window_);
         road3_.draw_self(window_);
         player_.draw_self(window_);
-        //h.draw(window_);
         obstacle1_.draw_self(window_);
         obstacle2_.draw_self(window_);
         obstacle3_.draw_self(window_);
         
-        window_.draw(text_);
+        score_text_.draw(window_);
         window_.display();
     }
 }

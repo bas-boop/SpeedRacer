@@ -6,7 +6,7 @@
 Obstacle::Obstacle(const Vector2& spawn_position)
 {
     spawn_position_ = spawn_position;
-    set_position(spawn_position_);
+    ForceBody::set_position(spawn_position_);
 
     direction_ = spawn_position_.x > 640.0f ? Direction::Left : Direction::Right;
     respawn_position_ = Vector2(spawn_position_.x, replace_position_);
@@ -56,12 +56,14 @@ void Obstacle::update()
             set_force(Vector2::zero);
             respawn_position_.y = replace_position_ + MathUtils::get_random(0, replace_randomness_);
             set_position(respawn_position_);
-            
+    
             vertical_movement_enabled_ = false;
             vertical_timer_.restart();
             clock.restart();
+            
+            has_scored_ = false;
         }
-
+        
         add_force(force);
         update_physics();
     }

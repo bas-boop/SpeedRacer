@@ -2,9 +2,9 @@
 #include "Obstacle.h"
 #include "Player.h"
 #include "Road.h"
-#include "../Math/ForceBody.h"
 #include "SFML/Graphics.hpp"
 #include "../Math/Vector2.h"
+#include "../UI/ScoreText.h"
 
 class Game
 {
@@ -22,11 +22,6 @@ private:
     sf::Color background_color_;
     const sf::Uint64 background_color_value_ = 80;
     sf::Clock clock_;
-    // static sf::Clock clock_2;
-
-    // std::vector<Sprite> sprites_;
-    sf::Font font_;
-    sf::Text text_;
     
     Player player_;
     Road road1_;
@@ -35,6 +30,9 @@ private:
     Obstacle obstacle1_;
     Obstacle obstacle2_;
     Obstacle obstacle3_;
+
+    ScoreText score_text_;
+    int score_ = -1;
     
     Vector2 screen_size_ = Vector2(1280, 720);
 };
